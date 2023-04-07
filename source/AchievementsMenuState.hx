@@ -41,8 +41,6 @@ class AchievementsMenuState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat3'));
 		add(bg);
 		
-
-		//chess
 		chess = new FlxBackdrop(Paths.image('fpbg'), 0, 0, true, false);
 		chess.y -= 80;
 		add(chess);

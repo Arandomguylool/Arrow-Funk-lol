@@ -1,26 +1,36 @@
 package;
 
 import flixel.FlxG;
+import openfl.system.System;
+import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
+import openfl.display3D.textures.Texture;
 import lime.utils.Assets;
 import flixel.FlxSprite;
 #if MODS_ALLOWED
 import sys.io.File;
 import sys.FileSystem;
-import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 #end
-
 import flash.media.Sound;
+
+#if cpp
+import cpp.vm.Gc;
+#elseif hl
+import hl.Gc;
+#elseif java
+import java.vm.Gc;
+#elseif neko
+import neko.vm.Gc;
+#end
 
 using StringTools;
 
 class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
-	inline public static var VIDEO_EXT = "mp4";
 
 	#if MODS_ALLOWED
 	#if (haxe >= "4.0.0")
@@ -39,29 +49,81 @@ class Paths
 		'songs',
 		'music',
 		'sounds',
-		'videos',
 		'images',
 		'stages',
 		'weeks'
 	];
 	#end
 
-	public static function destroyLoadedImages(ignoreCheck:Bool = false) {
-		#if MODS_ALLOWED
-		if(!ignoreCheck && ClientPrefs.imagesPersist) return; //If there's 20+ images loaded, do a cleanup just for preventing a crash
+	private static var currentTrackedAssets:Map<String, Map<String, Dynamic>> = ["textures" => [], "graphics" => [], "sounds" => []];
+	private static var localTrackedAssets:Map<String, Array<String>> = ["graphics" => [], "sounds" => []];
 
-		for (key in customImagesLoaded.keys()) {
-			var graphic:FlxGraphic = FlxG.bitmap.get(key);
-			if(graphic != null) {
-				graphic.bitmap.dispose();
+	public static final extensions:Map<String, String> = ["image" => "png", "audio" => "ogg", "video" => "mp4"];
+
+	public static var dumpExclusions:Array<String> = [];
+
+	public static function excludeAsset(key:String):Void {
+		if (!dumpExclusions.contains(key))
+			dumpExclusions.push(key);
+	}
+
+	public static function clearUnusedMemory():Void {
+		for (key in currentTrackedAssets["graphics"].keys()) {
+			@:privateAccess
+			if (!localTrackedAssets["graphics"].contains(key)) {
+				if (currentTrackedAssets["textures"].exists(key)) {
+					var texture:Null<Texture> = currentTrackedAssets["textures"].get(key);
+					texture.dispose();
+					texture = null;
+					currentTrackedAssets["textures"].remove(key);
+				}
+
+				var graphic:Null<FlxGraphic> = currentTrackedAssets["graphics"].get(key);
+				OpenFlAssets.cache.removeBitmapData(key);
+				FlxG.bitmap._cache.remove(key);
 				graphic.destroy();
-				FlxG.bitmap.removeByKey(key);
+				currentTrackedAssets["graphics"].remove(key);
 			}
 		}
-		Paths.customImagesLoaded.clear();
+
+		for (key in currentTrackedAssets["sounds"].keys()) {
+			if (!localTrackedAssets["sounds"].contains(key)) {
+				OpenFlAssets.cache.removeSound(key);
+				currentTrackedAssets["sounds"].remove(key);
+			}
+		}
+
+		// run the garbage collector for good measure lmfao
+		#if (cpp || neko || java || hl)
+		Gc.run(true);
+		Gc.compact();
 		#end
 	}
 
+	public static function clearStoredMemory():Void {
+		FlxG.bitmap.dumpCache();
+
+		@:privateAccess
+		for (key in FlxG.bitmap._cache.keys()) {
+			if (!currentTrackedAssets["graphics"].exists(key)) {
+				var graphic:Null<FlxGraphic> = FlxG.bitmap._cache.get(key);
+				OpenFlAssets.cache.removeBitmapData(key);
+				FlxG.bitmap._cache.remove(key);
+				graphic.destroy();
+			}
+		}
+
+		for (key in OpenFlAssets.cache.getSoundKeys()) {
+			if (!currentTrackedAssets["sounds"].exists(key))
+				OpenFlAssets.cache.removeSound(key);
+		}
+
+		for (key in OpenFlAssets.cache.getFontKeys())
+			OpenFlAssets.cache.removeFont(key);
+
+		localTrackedAssets["sounds"] = localTrackedAssets["graphics"] = [];
+	}
+	
 	static public var currentModDirectory:String = '';
 	static var currentLevel:String;
 	static public function setCurrentLevel(name:String)
@@ -129,17 +191,6 @@ class Paths
 	inline static public function lua(key:String, ?library:String)
 	{
 		return getPath('$key.lua', TEXT, library);
-	}
-
-	static public function video(key:String)
-	{
-		#if MODS_ALLOWED
-		var file:String = modsVideo(key);
-		if(FileSystem.exists(file)) {
-			return file;
-		}
-		#end
-		return 'assets/videos/$key.$VIDEO_EXT';
 	}
 
 	static public function sound(key:String, ?library:String):Dynamic
@@ -210,15 +261,52 @@ class Paths
 	}
 	#end
 
-	inline static public function image(key:String, ?library:String):Dynamic
-	{
-		#if MODS_ALLOWED
-		var imageToReturn:FlxGraphic = addCustomGraphic(key);
-		if(imageToReturn != null) return imageToReturn;
-		#end
-		return getPath('images/$key.png', IMAGE, library);
+	public static function image(key:String, ?library:String):FlxGraphic {
+		var returnAsset:FlxGraphic = returnGraphic(key, library);
+		return returnAsset;
 	}
-	
+
+
+	public static function returnGraphic(key:String, ?library:String) {
+		var path:String = getPath('images/$key.png', IMAGE, library);
+		if (OpenFlAssets.exists(path)) {
+			if (!currentTrackedAssets["graphics"].exists(path)) {
+				var graphic:FlxGraphic;
+				var bitmapData:BitmapData = OpenFlAssets.getBitmapData(path);
+
+				if (ClientPrefs.permitirgpu) {
+					#if (debug && !mobile)
+					trace('carregando $path por GPU'); //Apenas para trackear se tem alguma coisa ocupando memória onde não deveria.
+					//Isso faz o jogo lagar um pouquinho, mas é só no debug mesmo pra saber se não tem nada absurdo sendo carregado.
+					#end
+					var texture:Texture = FlxG.stage.context3D.createTexture(bitmapData.width, bitmapData.height, BGRA, true);
+					texture.uploadFromBitmapData(bitmapData);
+					currentTrackedAssets["textures"].set(path, texture);
+
+					bitmapData.disposeImage();
+					bitmapData.dispose();
+					bitmapData = null;
+
+					graphic = FlxGraphic.fromBitmapData(openfl.display.BitmapData.fromTexture(texture), false, path);
+				} else{
+					#if (debug && !mobile)
+					trace('carregando $path por CPU');
+					#end
+					graphic = FlxGraphic.fromBitmapData(bitmapData, false, path);
+				}
+
+				graphic.persist = true;
+				currentTrackedAssets["graphics"].set(path, graphic);
+			}
+
+			localTrackedAssets["graphics"].push(path);
+			return currentTrackedAssets["graphics"].get(path);
+		}
+		FlxG.log.error('oh no $path is returning null NOOOO');
+		return null; //Apenas para garantir que o jooj tentará carregar do jeito normal primeiro (ou então ajuidar a descobrir qual o pilantra.)
+	}
+
+
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
 	{
 		#if sys
@@ -266,35 +354,16 @@ class Paths
 		return false;
 	}
 
-	inline static public function getSparrowAtlas(key:String, ?library:String)
+inline static public function getSparrowAtlas(key:String, ?library:String)
 	{
-		#if MODS_ALLOWED
-		var imageLoaded:FlxGraphic = addCustomGraphic(key);
-		var xmlExists:Bool = false;
-		if(Util.exists(modsXml(key))) {
-			xmlExists = true;
-		}
-
-		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? Util.getContent(modsXml(key)) : file('images/$key.xml', library)));
-		#else
 		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
-		#end
 	}
 
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
-		#if MODS_ALLOWED
-		var imageLoaded:FlxGraphic = addCustomGraphic(key);
-		var txtExists:Bool = false;
-		if(Util.exists(modsTxt(key))) {
-			txtExists = true;
-		}
-
-		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)), (txtExists ? Util.getContent(modsTxt(key)) : file('images/$key.txt', library)));
-		#else
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
-		#end
 	}
+
 
 	inline static public function formatToSongPath(path:String) {
 		return path.toLowerCase().replace(' ', '-');
@@ -321,10 +390,6 @@ class Paths
 
 	inline static public function modsJson(key:String) {
 		return modFolders('data/' + key + '.json');
-	}
-
-	inline static public function modsVideo(key:String) {
-		return modFolders('videos/' + key + '.' + VIDEO_EXT);
 	}
 
 	inline static public function modsMusic(key:String) {

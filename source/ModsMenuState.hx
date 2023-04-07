@@ -64,7 +64,6 @@ class ModsMenuState extends MusicBeatState
 
 	override function create()
 	{
-		Paths.destroyLoadedImages();
 		WeekData.setDirectoryFromWeek();
 
 		#if desktop
