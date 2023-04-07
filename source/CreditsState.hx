@@ -89,7 +89,7 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Android Port'], // Type issues
+			['Android Port'], // Type issues -MateuzinhoX02 // Foi proposital, olha alí, Arrow Funk, Credits e Special Thanks estão escrito errado, então escrevi também -idklool
 			['idklool', 'photoshop', 'Arrow Funk!1!111!!', 'https://youtube.com/@idklool12', 'C6297F'],
 			['MateusX02', 'vini', 'Viniccius13!1!111!!', 'https://youtube.com/@MateusX02', 'C6297F'],
 			[''],
