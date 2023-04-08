@@ -48,7 +48,7 @@ jobs:
           haxelib --quiet setup /home/runner/haxelib
           haxelib --quiet install hxcpp > /dev/null
           haxelib --quiet install lime 7.9.0
-          haxelib --quiet install openfl 9.1.0
+          haxelib git openfl https://github.com/MateuzinhoX02/openfl-optimized/
           haxelib --quiet install flixel 4.11.0
           haxelib --quiet run lime setup flixel
           haxelib --quiet install flixel-tools
