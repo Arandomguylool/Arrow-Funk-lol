@@ -4882,17 +4882,15 @@ class PlayState extends MusicBeatState
 		if(curStep == lastStepHit) {
 			return;
 		}
-		//essa merda de step hit 
-
-		//COISA DA MUSICA
-
-		if (curStep == 1)
-			{
-				FlxTween.tween(songinfo, {x: 0}, 2.6, {ease: FlxEase.expoOut});
-			}
 		
-		if (curStep == 32)
-			{
+		// Man, essa Nashira é muito exagerada cara
+		// Que puta código burro
+
+		switch(curStep) {
+		
+			case 1:
+				FlxTween.tween(songinfo, {x: 0}, 2.6, {ease: FlxEase.expoOut});
+			case 2:
 				FlxTween.tween(songinfo, {x: -500}, 2.6, {
 					ease: FlxEase.expoIn,
 					onComplete: function(twn:FlxTween)
@@ -4900,895 +4898,433 @@ class PlayState extends MusicBeatState
 						songinfo.alpha = 0;
 					}
 				});
-			}
+		
+		}
 
-			
+		if (curSong == 'Earthquake')
 
-		/*
-		if (curSong == 'Tutorial') //não funciona P A I N
-			{
-				if (curStep >= 608 && difficulty == 0)
-					{
-					vocals.volume = 0;
-					}
-
-			}
-			*/
-
-		//SALSICHA
-
-		if (curSong == 'Earthquake') //zoom na partezinha legal da música uwu
 			{
 					
-					//transformasao
-					 //VAI
-					if (curStep == 1248)
-						{
-							FlxG.sound.play(Paths.sound('salsicha1'));
-						}
+				switch(curStep) {
 
-					 //VOLTA
-					if (curStep == 2064)
-						{
-							FlxG.sound.play(Paths.sound('salsicha2'));
-						}
+					case 1248:
+						FlxG.sound.play(Paths.sound('salsicha1'));
 
-
-					//FLASH
-						//VAI
-						if (curStep == 1296)
-						{
-							FlxG.camera.flash(FlxColor.WHITE, 2);
-						}
-
-						//VOLTA
-						if (curStep == 2096)
-							{
-								FlxG.camera.flash(FlxColor.WHITE, 2);
-							}
-					
-					//FIM DOS FRLASH
-				
-				//vai
-				if (curStep == 1840)
-					{
-						defaultCamZoom = 0.54;
-					}
-				//volta
-				if (curStep == 2088)
-					{
-						defaultCamZoom = 0.58;
-					}
-
-				if (curStep == 2092)
-					{
-						defaultCamZoom = 0.62;
-					}
-
-				if (curStep == 2096)
-					{
-						defaultCamZoom = 0.48;
-					}
-
-					
-			}
-
-		//FRESHER
-		if (curSong == 'Fresher') 
-			{
-				if (curStep == 428)
-				{
-					defaultCamZoom = 0.65;
-	
-					
-					
-	
-				}
-				
-				if (curStep == 432)
-				{
-					defaultCamZoom = 0.70;
-	
-					
-					
-	
-				}
-	
-				if (curStep == 448)
-				{
-					
-					defaultCamZoom = 0.57;
-				}
-
-				if (curStep == 704)
-					{
+					case 2064:
+						FlxG.sound.play(Paths.sound('salsicha2'));
 						
-						defaultCamZoom = 0.70;
+					case 1296:
+						FlxG.camera.flash(FlxColor.WHITE, 2);
+					
+					case 2096:
+						FlxG.camera.flash(FlxColor.WHITE, 2);
+		
+					case 1840:
+						defaultCamZoom = 0.54;
+
+					case 2088:
+						defaultCamZoom = 0.58;
+		
+
+					case 2092:
+						defaultCamZoom = 0.62;
+
+					case 2096:
+						defaultCamZoom = 0.48;
+					
 					}
-
-					if (curStep == 892)
-						{
-							
-							defaultCamZoom = 0.57;
-						}
-
-
-	
+		
 			}
+
+
+			if (curSong == 'Fresher') 
+			{
+
+					switch(curStep) {
+						case 428:
+							defaultCamZoom = 0.65;
+						case 432:
+							defaultCamZoom = 0.70;
+						case 448:
+							defaultCamZoom = 0.57;
+						case 704:
+							defaultCamZoom = 0.65;
+						case 832:
+							defaultCamZoom = 0.57;
+						case 892:
+							defaultCamZoom = 0.57;
+					}
+		
+			}
+
 			if (curSong == 'Reboop') 
 			{
-			//hey
-				/*
-					//Descartado, mas vou deixar aqui mesmo assim caso alguém encontre
-					//COLOQUEI NA PSYCH ENGINE UOOOOOOO
-	
-						if (curStep == 128)
-							{
-							boyfriend.playAnim('hey', true);
-							}	
-						if (curStep == 256)
-							{
-							boyfriend.playAnim('hey', true);
-							}	
-						if (curStep == 324)
-							{
-							boyfriend.playAnim('hey', true);
-							}
-						if (curStep == 388)
-							{
-							boyfriend.playAnim('hey', true);
-							}
-						if (curStep == 512)
-							{
-							boyfriend.playAnim('hey', true);
-							}
-						if (curStep == 640)
-							{
-							boyfriend.playAnim('hey', true);
-							}
-						if (curStep == 772)
-							{
-							boyfriend.playAnim('hey', true);
-							}
-						if (curStep == 896)
-							{
-							boyfriend.playAnim('hey', true);
-							gf.playAnim('cheer', true);
-							}
-					*/
-	
-			//zoom
-							if (curStep == 128)
-							{
+					switch(curStep) {
+						case 128:
 							defaultCamZoom = 0.6;
-							}
-							//z1
-							if (curStep == 184)
-							{
+						case 184:
 							defaultCamZoom = 0.65;
-							}
-							//z2
-							if (curStep == 186)
-							{
+						case 186:
 							defaultCamZoom = 0.7;
-							}
-							//z3
-							if (curStep == 190)
-							{
+						case 190:
 							defaultCamZoom = 0.75;
-							}
-							//volta1
-							if (curStep == 192)
-							{
+						case 192:
 							defaultCamZoom = 0.6;
-							}
-							//z1 
-							if (curStep == 248)
-							{
+						case 248:
 							defaultCamZoom = 0.65;
-							}
-							//z2
-							if (curStep == 250)
-							{
+						case 250:
 							defaultCamZoom = 0.7;
-							}
-							//z3
-							if (curStep == 254)
-							{
+						case 254:
 							defaultCamZoom = 0.75;
-							}
-							//volta2
-							if (curStep == 256)
-							{
+						case 256:
 							defaultCamZoom = 0.6;
-							}
-							
-							if (curStep == 568)
-							{
+						case 568:
 							defaultCamZoom = 0.65;
-							}
-	
-							if (curStep == 570)
-							{
+						case 570:
 							defaultCamZoom = 0.7;
-							}
-	
-							if (curStep == 573)
-							{
+						case 573:
 							defaultCamZoom = 0.75;
-							}
-	
-							if (curStep == 576)
-							{
+						case 576:
 							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 632)
-							{
+						case 632:
 							defaultCamZoom = 0.65;
-							}
-	
-							if (curStep == 633)
-							{
+						case 633:
 							defaultCamZoom = 0.7;
-							}
-	
-							if (curStep == 637)
-							{
+						case 637:
 							defaultCamZoom = 0.75;
-							}
-	
-							if (curStep == 640)
-							{
+						case 640:
 							defaultCamZoom = 0.6;
-							}
+					}
 	
 			}
-			if (curSong == 'Fresher') //de novo porra? vsf 
-			{
-				if (curStep == 704)
-					{
-					defaultCamZoom = 0.65;
-					}
 
-
-				if (curStep == 832)
-					{
-					defaultCamZoom = 0.57;
-					}
-			}
 			if (curSong == 'Rap-King') 
 			{
 	
-						//FINAL ANIMATION LOOOL
-					if (health >= 1)
-						{
-							if (curBeat == 728)
-								{
-	
+				if (health >= 1)
+				{
+							switch(curBeat) {
+								case 728:
 									angryDad = true;
-	
-								}
-	
-							if (curStep == 2914)
-								{
-			
+								case 2914:
 									FlxG.sound.play(Paths.sound('micthrow'));
-			
-								}
-	
-							if (curBeat == 729)
-								{
-			
+								case 729:
 									angryDad = false;
-									
-			
-								}
-								if (curBeat > 729)
-									{
-				
-										dad.playAnim('micend');
-				
-									}
-						}
-				//animation test
-					//
-			//zoom
-				//inicio 
-	
-					
-	
-							if (curStep == 32)
-							{
-							defaultCamZoom = 0.6;
-							
 							}
-	
-							if (curStep == 48)
-							{
-							defaultCamZoom = 0.62;
-							
+
+							if(curBeat > 729) {
+								dad.playAnim('micend');
 							}
-	
-							if (curStep == 64)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 96)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 112)
-							{
-							defaultCamZoom = 0.62;
-							}
-	
-							if (curStep == 128)
-							{
-							
-							defaultCamZoom = 0.57;
-							}
-	
-					//Voz começa aqui uwu
-	
-							if (curStep == 640)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 672)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 688)
-							{
-							defaultCamZoom = 0.63;
-							}
-	
-							if (curStep == 688)
-							{
-							defaultCamZoom = 0.64;
-							}
-	
-							if (curStep == 692)
-							{
-							
-							defaultCamZoom = 0.65;
-							}
-	
-							if (curStep == 698)
-							{
-							defaultCamZoom = 0.7;
-							}
-	
-							if (curStep == 700)
-							{
-							defaultCamZoom = 0.75;
-							}
-	
-							if (curStep == 704)
-							{
-						
-							defaultCamZoom = 0.7;
-							}
-				//parte meio 1
-							if (curStep == 960)
-							{
-							FlxG.camera.flash(FlxColor.WHITE, 1.5);
-							BaladaIsDark = true;
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 1088)
-							{
-							defaultCamZoom = 0.58;
-							}
-	
-							if (curStep == 1104)
-							{
-							defaultCamZoom = 0.62;
-							}
-	
-							if (curStep == 1120)
-							{
-							defaultCamZoom = 0.66;
-							}
-	
-							if (curStep == 1136)
-							{
-							defaultCamZoom = 0.60;
-							}
-	
-							if (curStep == 1144)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 1152)
-							{
-							defaultCamZoom = 0.59;
-							}
-	
-							if (curStep == 1168)
-							{
-							defaultCamZoom = 0.62;
-							}
-	
-							if (curStep == 1184)
-							{
-							defaultCamZoom = 0.65;
-							}
-	
-							if (curStep == 1200)
-							{
-							defaultCamZoom = 0.7;
-							}
-	
-							if (curStep == 1204)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 1208)
-							{
-							defaultCamZoom = 0.8;
-							}
-	
-							if (curStep == 1212)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 1216)
-							{
-							FlxG.camera.flash(FlxColor.WHITE, 1.5);
-							BaladaIsDark = false;
-							defaultCamZoom = 0.65;
-							}
-	
-							if (curStep == 1344)
-							{
-							defaultCamZoom = 0.68;
-							}
-	
-							if (curStep == 1408)
-							{
-							defaultCamZoom = 0.72;
-							}
-	
-							if (curStep == 1464)
-							{
-							defaultCamZoom = 0.78;
-							}
-	
-							if (curStep == 1472)
-							{
-							FlxG.camera.flash(FlxColor.BLACK, 1.5);
-							BaladaIsDark = true;
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 1600)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 1728)
-							{
-							FlxG.camera.flash(FlxColor.WHITE, 1.5);
-							BaladaIsDark = false;
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 1856)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 1968)
-							{
-							defaultCamZoom = 0.65;
-							}
-	
-							if (curStep == 1976)
-							{
-							defaultCamZoom = 0.7;
-							}
-	
-							if (curStep == 1980)
-							{
-							defaultCamZoom = 0.75;
-							}
-	
-							if (curStep == 1984)
-							{
-							FlxG.camera.flash(FlxColor.WHITE, 1.5);
-							BaladaIsDark = true;
-							defaultCamZoom = 0.6;
-							}
-	
-					//pitch mudou slk
-	
-							if (curStep == 2112)
-							{
-							FlxG.camera.flash(FlxColor.WHITE, 1.5);
-							BaladaIsDark = false;
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 2128)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 2144)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 2160)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 2176)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 2192)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 2208)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 2224)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-					//ah shit here we go again
-							if (curStep == 2240)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 2256)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 2272)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 2288)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 2304)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 2320)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-							if (curStep == 2336)
-							{
-							defaultCamZoom = 0.57;
-							}
-	
-							if (curStep == 2352)
-							{
-							defaultCamZoom = 0.6;
-							}
-	
-					//acabou graças a deus
-	
-							if (curStep == 2368)
-							{
-							
-							defaultCamZoom = 0.57;
+
+				}
+							switch(curStep) {
+								case 32:
+									defaultCamZoom = 0.6;
+								case 48:
+									defaultCamZoom = 0.62;
+								case 64:
+									defaultCamZoom = 0.57;
+								case 96:
+									defaultCamZoom = 0.6;
+								case 112:
+									defaultCamZoom = 0.62;
+								case 128:
+									defaultCamZoom = 0.57;
+								case 640:
+									defaultCamZoom = 0.57;
+								case 672:
+									defaultCamZoom = 0.6;
+								case 688:
+									defaultCamZoom = 0.63;
+								case 692:
+									defaultCamZoom = 0.65;
+								case 698:
+									defaultCamZoom = 0.7;
+								case 700:
+									defaultCamZoom = 0.75;
+								case 704:
+									defaultCamZoom = 0.7;
+								case 960:
+									FlxG.camera.flash(FlxColor.WHITE, 1.5);
+									BaladaIsDark = true;
+									defaultCamZoom = 0.57;
+								case 1088:
+									defaultCamZoom = 0.58;
+								case 1104:
+									defaultCamZoom = 0.62;
+								case 1120:
+									defaultCamZoom = 0.66;
+								case 1136:
+									defaultCamZoom = 0.60;
+								case 1144:
+									defaultCamZoom = 0.57;
+								case 1152:
+									defaultCamZoom = 0.59;
+								case 1168:
+									defaultCamZoom = 0.62;
+								case 1184:
+									defaultCamZoom = 0.65;
+									case 1200:
+										defaultCamZoom = 0.7;
+										
+									case 1204:
+										defaultCamZoom = 0.6;
+										
+									case 1208:
+										defaultCamZoom = 0.8;
+										
+									case 1212:
+										defaultCamZoom = 0.57;
+										
+									case 1216:
+										FlxG.camera.flash(FlxColor.WHITE, 1.5);
+										BaladaIsDark = false;
+										defaultCamZoom = 0.65;
+										
+									case 1344:
+										defaultCamZoom = 0.68;
+										
+									case 1408:
+										defaultCamZoom = 0.72;
+										
+									case 1464:
+										defaultCamZoom = 0.78;
+										
+									case 1472:
+										FlxG.camera.flash(FlxColor.BLACK, 1.5);
+										BaladaIsDark = true;
+										defaultCamZoom = 0.57;
+										
+									case 1600:
+										defaultCamZoom = 0.6;
+										
+									case 1728:
+										FlxG.camera.flash(FlxColor.WHITE, 1.5);
+										BaladaIsDark = false;
+										defaultCamZoom = 0.57;
+										
+									case 1856:
+										defaultCamZoom = 0.6;
+										
+									case 1968:
+										defaultCamZoom = 0.65;
+										
+									case 1976:
+										defaultCamZoom = 0.7;
+										
+									case 1980:
+										defaultCamZoom = 0.75;
+										
+									case 1984:
+										FlxG.camera.flash(FlxColor.WHITE, 1.5);
+										BaladaIsDark = true;
+										defaultCamZoom = 0.6;
+										
+									case 2112:
+										FlxG.camera.flash(FlxColor.WHITE, 1.5);
+										BaladaIsDark = false;
+										defaultCamZoom = 0.57;
+										
+									case 2128:
+										defaultCamZoom = 0.6;
+										
+									case 2144:
+										defaultCamZoom = 0.57;
+										
+									case 2160:
+										defaultCamZoom = 0.6;
+										
+									case 2176:
+										defaultCamZoom = 0.57;
+										
+									case 2192:
+										defaultCamZoom = 0.6;
+										
+									case 2208:
+										defaultCamZoom = 0.57;
+										
+									case 2224:
+										defaultCamZoom = 0.6;
+										
+									case 2240:
+										defaultCamZoom = 0.57;
+										
+									case 2256:
+										defaultCamZoom = 0.6;
+										
+									case 2272:
+										defaultCamZoom = 0.57;
+										
+									case 2288:
+										defaultCamZoom = 0.6;
+										
+									case 2304:
+										defaultCamZoom = 0.57;
+										
+									case 2320:
+										defaultCamZoom = 0.6;
+										
+									case 2336:
+										defaultCamZoom = 0.57;
+										
+									case 2352:
+										defaultCamZoom = 0.6;
+								
+									case 2368:
+										defaultCamZoom = 0.57;							
 							}
 			}
 			if (curSong == 'Bittersweet') 
 			{	
-	
-				if (curStep == 256)
-					{
+				switch(curStep) {
+					case 256:
 						FlxTween.tween(dancef, {alpha:1}, 2.4, {ease: FlxEase.expoOut});
-					
-					}
+						defaultCamZoom = 0.63;
+						spookersvel = 1;
+						
+					case 668:
+						defaultCamZoom = 0.75;
+						
+					case 672:
+						defaultCamZoom = 0.63;
+						
+					case 732:
+						defaultCamZoom = 0.75;
+						
+					case 736:
+						defaultCamZoom = 0.63;
+						
+					case 1:
+						defaultCamZoom = 0.7;
+						
+					case 1024:
+						spookersvel = 2;
+						
+					case 1040:
+						spookersvel = 1;
+						
+					case 1056:
+						defaultCamZoom = 0.7;
+						spookersvel = 2;
+						
+					case 1296:
+						defaultCamZoom = 0.8;
+						spookersvel = 1;
+						
+					case 1300:
+						defaultCamZoom = 0.7;
+						
+					case 1304:
+						defaultCamZoom = 0.8;
+						
+					case 1308:
+						defaultCamZoom = 0.7;
+						
+					case 1312:
+						defaultCamZoom = 0.63;
+						
+					case 2080:
+						defaultCamZoom = 0.66;
+						
+					case 2084:
+						defaultCamZoom = 0.7;
+						
+					case 336:
+						spookersvel = 2;
+						
+				}
 				
-							if (curStep == 668)
-							{
-							defaultCamZoom = 0.75;
-							
-							}
-	
-							if (curStep == 672)
-							{
-							defaultCamZoom = 0.63;
-							}
-	
-							if (curStep == 732)
-							{
-							defaultCamZoom = 0.75;
-							
-							}
-	
-							if (curStep == 736)
-							{
-							defaultCamZoom = 0.63;
-							}
-	
-						//zooms e gf mexendo 
-	
-							if (curStep == 1)
-							{
-							defaultCamZoom = 0.7;
-							
-							}
-	
-							if (curStep == 256)
-							{
-							defaultCamZoom = 0.63;
-							spookersvel = 1;
-							
-							}
-	
-								if (curStep == 1024)
-									{
-										spookersvel = 2;
-									
-									}
-
-								if (curStep == 1040)
-									{
-										spookersvel = 1;
-									
-									}
-
-							if (curStep == 1056)
-							{
-							defaultCamZoom = 0.7;
-							spookersvel = 2;
-							
-							
-							}
-	
-							if (curStep == 1296)
-							{
-							defaultCamZoom = 0.8;
-							spookersvel = 1;
-							
-							}
-	
-							if (curStep == 1300)
-							{
-							defaultCamZoom = 0.7;
-							
-							}
-	
-							if (curStep == 1304)
-							{
-							defaultCamZoom = 0.8;
-							
-							}
-	
-							if (curStep == 1308)
-							{
-							defaultCamZoom = 0.7;
-							
-							}
-	
-							if (curStep == 1312)
-							{
-							defaultCamZoom = 0.63;
-							
-							
-							}
-	
-							if (curStep == 2080)
-							{
-							defaultCamZoom = 0.66;
-							
-							}
-	
-							if (curStep == 2084)
-							{
-							defaultCamZoom = 0.7;
-							
-							}
-
-							if (curStep == 336)
-								{
-								spookersvel = 2;
-								
-								}
 						
 	
 			}
 			if (curSong == 'Nightfall') 
 				{	
-					//começo 1 
-
-					if (curStep == 1)
-						{
-							FlxTween.tween(dancef, {alpha:1}, 2.4, {ease: FlxEase.expoOut});
-						
-						}
-
-					if (curStep == 640)
-						{
-						defaultCamZoom = 0.60;
-						spookersvel = 1;
-						dancefvel = 3;
-						
-						}
-
-					if (curStep == 880)
-						{
-						defaultCamZoom = 0.65;
-						dancefvel = 2;
-						}
-					if (curStep == 888)
-						{
-						defaultCamZoom = 0.70;
-
-						}
-
-					if (curStep == 896)
-						{
-						defaultCamZoom = 0.75;
-						dancefvel = 1;
-
-						}
-					//cabo 1 (lento)
-					if (curStep == 1152)
-						{
-						defaultCamZoom = 0.56;
-						spookersvel = 2;
-						dancefvel = 2;
-						
-						}
-
-					//começo 2
-					if (curStep == 1664)
-						{
-						defaultCamZoom = 0.65;
-						spookersvel = 1;
-						dancefvel = 3;
-						
-						}
-
-					if (curStep == 1920)
-						{
-						defaultCamZoom = 0.75;
-						dancefvel = 1;
-						
-						
-						}
-
-					if (curStep == 2176)
-						{
-						defaultCamZoom = 0.65;
-						dancefvel = 2;
-						
-						}
-
-					if (curStep == 2432)
-						{
-						defaultCamZoom = 0.75;
-						dancefvel = 1;
-						
-						
-						}
-
-					if (curStep == 2688)
-						{
-						defaultCamZoom = 0.56;
-						spookersvel = 2;
-						dancefvel = 3;
-						
-						//falouu
-						FlxTween.tween(dancef, {alpha:0}, 3.4, {ease: FlxEase.expoIn});
-
-						}
-
+					switch (curStep)
+{
+    case 1:
+        FlxTween.tween(dancef, {alpha:1}, 2.4, {ease: FlxEase.expoOut});
+        
+    case 640:
+        defaultCamZoom = 0.60;
+        spookersvel = 1;
+        dancefvel = 3;
+        
+    case 880:
+        defaultCamZoom = 0.65;
+        dancefvel = 2;
+        
+    case 888:
+        defaultCamZoom = 0.70;
+        
+    case 896:
+        defaultCamZoom = 0.75;
+        dancefvel = 1;
+        
+    case 1152:
+        defaultCamZoom = 0.56;
+        spookersvel = 2;
+        dancefvel = 2;
+        
+    case 1664:
+        defaultCamZoom = 0.65;
+        spookersvel = 1;
+        dancefvel = 3;
+        
+    case 1920:
+        defaultCamZoom = 0.75;
+        dancefvel = 1;
+        
+    case 2176:
+        defaultCamZoom = 0.65;
+        dancefvel = 2;
+        
+    case 2432:
+        defaultCamZoom = 0.75;
+        dancefvel = 1;
+        
+    case 2688:
+        defaultCamZoom = 0.56;
+        spookersvel = 2;
+        dancefvel = 3;
+        FlxTween.tween(dancef, {alpha:0}, 3.4, {ease: FlxEase.expoIn});
+}
 
 				}
 			if (curSong == 'Virus') 
 				{	
 
-					if (curStep == 512)
-						{
-							defaultCamZoom = 0.65;
-						}
-	
-					if (curStep == 576)
-						{
-							defaultCamZoom = 0.7;
-						}
-	
-					if (curStep == 624)
-						{
-							defaultCamZoom = 0.75;
-						}
-	
-					if (curStep == 512)
-						{
-							defaultCamZoom = 0.65;
-						}
-	
-					if (curStep == 704)
-						{
-							defaultCamZoom = 0.7;
-						}
-				
-					if (curStep == 752)
-						{
-							defaultCamZoom = 0.75;
-						}
-						//metade
-					if (curStep == 768)
-						{
-							defaultCamZoom = 0.63;
-						}
-	
-					if (curStep == 1024)
-						{
-							defaultCamZoom = 0.7;
-						}
-	
-					if (curStep == 1152)
-						{
-							defaultCamZoom = 0.65;
-						}
-	
-					if (curStep == 1392)
-						{
-							defaultCamZoom = 0.7;
-						}
-	
-					if (curStep == 1408)
-						{
-							defaultCamZoom = 0.65;
-						}
-	
-					if (curStep == 1520)
-						{
-							defaultCamZoom = 0.7;
-						}
-	
-					if (curStep == 1536)
-						{
-							defaultCamZoom = 0.63;
-						}
-					//final
-	
-					if (curStep == 1552)
-						{
-							defaultCamZoom = 0.68;
-						}
-							
-				
-					if (curStep == 1556)
+					switch (curStep)
 					{
-						defaultCamZoom = 0.72;
+						case 512:
+							defaultCamZoom = 0.65;
+						case 576:
+							defaultCamZoom = 0.7;
+						case 624:
+							defaultCamZoom = 0.75;
+						case 704:
+							defaultCamZoom = 0.7;
+						case 752:
+							defaultCamZoom = 0.75;
+						case 768:
+							defaultCamZoom = 0.63;
+						case 1024:
+							defaultCamZoom = 0.7;
+						case 1152:
+							defaultCamZoom = 0.65;
+						case 1392:
+							defaultCamZoom = 0.7;
+						case 1408:
+							defaultCamZoom = 0.65;
+						case 1520:
+							defaultCamZoom = 0.7;
+						case 1536:
+							defaultCamZoom = 0.63;
+						case 1552:
+							defaultCamZoom = 0.68;
+						case 1556:
+							defaultCamZoom = 0.72;
 					}
+					
 					
 					
 				}
@@ -5796,123 +5332,80 @@ class PlayState extends MusicBeatState
 				if (curSong == 'Shacklesz')
 					{
 						
-						if (curStep == 128)
-							{
+						switch(curStep) {
+							case 128:
 								defaultCamZoom = 0.85;
-							}
-
-						if (curStep == 384)
-							{
+							case 384:
 								defaultCamZoom = 0.8;
-							}
-
-						if (curStep == 636)
-							{
+							case 636:
 								defaultCamZoom = 0.7;
-							}
-
-							if (curStep == 640)
-								{
-									defaultCamZoom = 0.75;
-								}
-						
-						if (curStep == 896)
-							{
+							case 640:
+								defaultCamZoom = 0.75;
+							case 896:
 								defaultCamZoom = 0.8;
-							}
-
-
-							if (curStep == 1018)
-								{
-									defaultCamZoom = 0.85;
-								}
-
-								if (curStep == 1024)
-									{
-										defaultCamZoom = 0.8;
-									}
+							case 1018:
+								defaultCamZoom = 0.85;
+							case 1024:
+								defaultCamZoom = 0.8;
+						}
 
 						if (curStep > 1135 && curStep < 1150)
 							{
 								defaultCamZoom -= 0.005;
 							}
-
-							if (curStep == 1400)
-								{
-									defaultCamZoom = 0.82;
-								}
-
-								if (curStep == 1404)
-									{
-										defaultCamZoom = 0.78;
-									}
-						//fin LOL
-						if (curStep == 1408)
-							{
-								defaultCamZoom = 0.75;
-							}
-
-							if (curStep == 1476)
-								{
+							
+							switch (curStep) {
+								case 128:
+									defaultCamZoom = 0.85;
+								case 384:
 									defaultCamZoom = 0.8;
-								}
-								if (curStep == 1536)
-									{
-										defaultCamZoom = 0.75;
-									}
-
-						//zooms sus
-						if (curStep == 832)
-							{
-								defaultCamZoom = 0.8;
-							}
-
-							if (curStep == 898)
-								{
+								case 636:
 									defaultCamZoom = 0.7;
-								}
-
-							if (curStep == 928)
-								{
+								case 640:
+									defaultCamZoom = 0.75;
+								case 896:
+									defaultCamZoom = 0.8;
+								case 1018:
 									defaultCamZoom = 0.85;
-								}
-								if (curStep == 960)
-									{
-										defaultCamZoom = 0.8;
-									}
-							if (curStep == 992)
-								{
+								case 1024:
+									defaultCamZoom = 0.8;
+								case 1400:
+									defaultCamZoom = 0.82;
+								case 1404:
+									defaultCamZoom = 0.78;
+									//fin LOL
+								case 1408:
+									defaultCamZoom = 0.75;
+								case 1476:
+									defaultCamZoom = 0.8;
+								case 1536:
+									defaultCamZoom = 0.75;
+									//zooms sus
+								case 832:
+									defaultCamZoom = 0.8;
+								case 898:
+									defaultCamZoom = 0.7;
+								case 928:
 									defaultCamZoom = 0.85;
-								}
-								if (curStep == 1050)
-									{
-										defaultCamZoom = 0.88;
-									}
-
-								if (curStep == 1050)
-									{
-										defaultCamZoom = 0.85;
-									}
-
-									if (curStep == 1082)
-										{
-											defaultCamZoom = 0.9;
-										}
-										if (curStep == 1088)
-											{
-												defaultCamZoom = 0.8;
-											}
-
-								//sus
-								if (curStep == 1272)
-									{
-										defaultCamZoom = 0.78;
-									}
-									if (curStep == 1280)
-										{
-											defaultCamZoom = 0.85;
-										}
-						//fim dos suus
+								case 960:
+									defaultCamZoom = 0.8;
+								case 992:
+									defaultCamZoom = 0.85;
+								case 1050:
+									defaultCamZoom = 0.88;
+								case 1052:
+									defaultCamZoom = 0.85;
+								case 1082:
+									defaultCamZoom = 0.9;
+								case 1088:
+									defaultCamZoom = 0.8;
+									//sus
+								case 1272:
+									defaultCamZoom = 0.78;
+								case 1280:
+									defaultCamZoom = 0.85;
+							}
+							
 						}
 
 					if (curStage == 'favela' || curStage == 'favelanoite')
@@ -5926,549 +5419,286 @@ class PlayState extends MusicBeatState
 						}
 			if (curSong == 'Blam')
 				{
-					// aud
-
-					if (curStep == 2488)
-						{
+					switch(curStep)
+					{
+						case 2488:
 							FlxG.sound.play(Paths.sound('oops'));
-						
-						}
-
-						if (curStep == 2492)
-							{
-								FlxG.sound.play(Paths.sound('oops'));
-							
-							}
-
-					//KLEITIN EVENT wip
-
-					if (curStep == 16) //fiz isso pra saporra nao trava na hora das notinha //(spoiler: NÃO FUNCIONOU)
-						{
+						case 2492:
+							FlxG.sound.play(Paths.sound('oops'));
+						case 16:
 							kleistate = 1;
 							FlxTween.tween(kleitin, {x: 2600}, 3.8, {ease: FlxEase.quartOut});
-						
-						}
-
-					if (curStep == 752) //752
-						{
-							
+						case 752:
 							FlxTween.tween(kleitin, {x: 1080}, 3.8, {
 								startDelay: 0.1,
 								ease: FlxEase.linear,
 								onComplete: function(twn:FlxTween)
 								{
-			
 									kleitin.animation.play('stop', true);
 									kleistate = 2;
-								
 								}
 							});
-
-						}
-
-						if (curStep == 1904) //sentou
-							{
-								defaultCamZoom = 0.82;
-								kleistate = 3;
-							}
-
-					//DANIEL EVENT
-					if (curStep == 1016) //1116
-						{
+						case 1904:
+							defaultCamZoom = 0.82;
+							kleistate = 3;
+						case 1016:
 							FlxTween.tween(carrofoda, {x:-600}, 2, {ease: FlxEase.quartOut});
-						}
-
-					if (curStep == 1116) //1116
-						{
+						case 1116:
 							FlxTween.tween(danielzinho, {x:-1020}, 8, {ease: FlxEase.linear});
-						}
-
-
-						//nasceu
-						if (curStep == 1424) //1232
-							{
-								FlxTween.tween(daniel, {x:-540}, 1.4, {ease: FlxEase.sineOut});
-							}
-
-					//fim do daniel event pq eu quero
-					//BUSAO
-					if (curStep == 1865) 
-						{
+						case 1424:
+							FlxTween.tween(daniel, {x:-540}, 1.4, {ease: FlxEase.sineOut});
+						case 1865:
 							busao.y = -45;
-							FlxTween.tween(busao, {x:230}, 6, {ease: FlxEase.quartOut}); //BUSAO EVENT
+							FlxTween.tween(busao, {x:230}, 6, {ease: FlxEase.quartOut});
 							FlxTween.tween(busao, {y:-40}, 6, {ease: FlxEase.bounceInOut});
-						}
-					//ok
-					//nao funciona por motivos de (num sei porra)
-					if (curStep == 16)
-						{
+						case 16, 32, 48, 64, 80, 96, 112, 116, 120, 124:
+							defaultCamZoom = (curStep - 16) * 0.02 + 0.7;
+						case 128:
 							defaultCamZoom = 0.7;
-						}
-						if (curStep == 32)
-							{
-								defaultCamZoom = 0.72;
-							}
-							if (curStep == 48)
-								{
-									defaultCamZoom = 0.74;
-								}
-								if (curStep == 64)
-									{
-										defaultCamZoom = 0.76;
-									}
-									if (curStep == 80)
-										{
-											defaultCamZoom = 0.78;
-										}
-										if (curStep == 96)
-											{
-												defaultCamZoom = 0.8;
-											}
-											if (curStep == 112)
-												{
-													defaultCamZoom = 0.82;
-												}
-												if (curStep == 116)
-													{
-														defaultCamZoom = 0.84;
-													}
-													if (curStep == 120)
-														{
-															defaultCamZoom = 0.86;
-														}
-														if (curStep == 124)
-															{
-																defaultCamZoom = 0.88;
-															}
-						//zoofim
-						
-					if (curStep == 128)
-						{
-							defaultCamZoom = 0.7;
-						}
-
-						if (curStep == 386)
-							{
-								defaultCamZoom = 0.75;
-							}
-
-							if (curStep == 512)
-								{
-									defaultCamZoom = 0.8;
-								}
-								if (curStep == 624)
-									{
-										defaultCamZoom = 0.85;
-									}
-									if (curStep == 628)
-										{
-											defaultCamZoom = 0.9;
-										}
-										if (curStep == 632)
-											{
-												defaultCamZoom = 0.95;
-											}
-											if (curStep == 636)
-												{
-													defaultCamZoom = 1;
-												}
-												
-				//TIRO
-				if (curStep == 640)
-					{
-						defaultCamZoom = 0.7;
-					}
-					//ativa a barbara com medinho de bala uiui 
-					if (curStep == 656)
-						{
-							gfmedo = true;
-						}
-				//continua
-				if (curStep == 766)
-					{
-						defaultCamZoom = 0.75;
-					}
-					if (curStep == 768)
-						{
-							defaultCamZoom = 0.8;
-						}
-
-				if (curStep == 1024)
-					{
-						defaultCamZoom = 0.7;
-					}
-
-				if (curStep == 1152)
-					{
-						defaultCamZoom = 0.75;
-					}
-
-				if (curStep == 1280)
-					{
-						defaultCamZoom = 0.8;
-					}
-				//z
-				if (curStep == 1380)
-					{
-						defaultCamZoom = 0.9;
-					}
-					if (curStep == 1382)
-						{
-							defaultCamZoom = 0.8;
-						}
-				
-				if (curStep == 1396)
-					{
-						defaultCamZoom = 0.9;
-					}
-					if (curStep == 1398)
-						{
-							defaultCamZoom = 0.8;
-						}
-
-				
-				if (curStep == 1506)
-					{
-						defaultCamZoom = 0.9;
-					}
-					if (curStep == 1510)
-						{
-							defaultCamZoom = 0.8;
-						}
-				
-				if (curStep == 1522)
-					{
-						defaultCamZoom = 0.9;
-					}
-					if (curStep == 1526)
-						{
-							defaultCamZoom = 0.8;
-						}
-						if (curStep == 1536)
-							{
-								defaultCamZoom = 0.75;
-							}
-				if (curStep == 1664)
-					{
-						defaultCamZoom = 0.7;
-					}
-					if (curStep == 1712)
-						{
+						case 386:
 							defaultCamZoom = 0.75;
-						}
-						if (curStep == 1728)
-							{
-								defaultCamZoom = 0.7;
-							}
-				if (curStep == 1776)
-					{
-						defaultCamZoom = 0.8;
-					}
-					if (curStep == 1792)
-						{
+						case 512:
+							defaultCamZoom = 0.8;
+						case 624:
+							defaultCamZoom = 0.85;
+						case 628:
+							defaultCamZoom = 0.9;
+						case 632:
+							defaultCamZoom = 0.95;
+						case 636:
+							defaultCamZoom = 1;
+						case 640:
 							defaultCamZoom = 0.7;
-						}
-						if (curStep == 1824)
-							{
+						case 656:
+							gfmedo = true;
+						case 766:
+							defaultCamZoom = 0.75;
+						case 768:
+							defaultCamZoom = 0.8;
+						case 1024:
+							defaultCamZoom = 0.7; 
+							case 1280:
+								defaultCamZoom = 0.8;
+								
+							case 1380:
+								defaultCamZoom = 0.9;
+								
+							case 1382:
+								defaultCamZoom = 0.8;
+								
+							case 1396:
+								defaultCamZoom = 0.9;
+								
+							case 1398:
+								defaultCamZoom = 0.8;
+								
+							case 1506:
+								defaultCamZoom = 0.9;
+								
+							case 1510:
+								defaultCamZoom = 0.8;
+								
+							case 1522:
+								defaultCamZoom = 0.9;
+								
+							case 1526:
+								defaultCamZoom = 0.8;
+								
+							case 1536:
 								defaultCamZoom = 0.75;
-							}
-							if (curStep == 1856)
-								{
-									defaultCamZoom = 0.7;
-								}
-				if (curStep == 1920)
-					{
-						defaultCamZoom = 0.8;
+								
+							case 1664:
+								defaultCamZoom = 0.7;
+								
+							case 1712:
+								defaultCamZoom = 0.75;
+								
+							case 1728:
+								defaultCamZoom = 0.7;
+								
+							case 1776:
+								defaultCamZoom = 0.8;
+								
+							case 1792:
+								defaultCamZoom = 0.7;
+								
+							case 1824:
+								defaultCamZoom = 0.75;
+								
+							case 1856:
+								defaultCamZoom = 0.7;
+								
+							case 1920:
+								defaultCamZoom = 0.8;
+								
+
 					}
+			
 					if (curStep >= 2008 && curStep < 2016)
 						{
 							defaultCamZoom -= 0.002;
 						}
-				if (curStep == 2016)
-					{
-						defaultCamZoom = 0.7;
-					}
-					if (curStep == 2048)
-						{
-							defaultCamZoom = 0.75;
-						}
-						if (curStep == 2176)
-							{
-								defaultCamZoom = 0.8;
-							}
-							if (curStep == 2304)
-								{
-									defaultCamZoom = 0.85;
-								}
 
-				if (curStep == 2432)
-					{
-						defaultCamZoom = 0.75;
-					}
-					if (curStep == 2486)
-						{
+					switch(curStep) {
+						case 2016:
+							defaultCamZoom = 0.7;
+							
+						case 2048:
+							defaultCamZoom = 0.75;
+							
+						case 2176:
+							defaultCamZoom = 0.8;
+							
+						case 2304:
 							defaultCamZoom = 0.85;
-						}
-						if (curStep == 2496)
-							{
-								defaultCamZoom = 0.75;
-							}
-							if (curStep == 2688)
-								{
-									defaultCamZoom = 0.7;
-								}
+							
+						case 2432:
+							defaultCamZoom = 0.75;
+							
+						case 2486:
+							defaultCamZoom = 0.85;
+							
+						case 2496:
+							defaultCamZoom = 0.75;
+							
+						case 2688:
+							defaultCamZoom = 0.7;
+							
+					}
 				}
 			if (curSong == 'Loaded')
 				{
-					if (curStep == 128)
-						{
-							defaultCamZoom = 0.9;
-						}
+					switch (curStep)
+{
+    case 128:
+        defaultCamZoom = 0.9;
+    case 144:
+        defaultCamZoom = 0.8;
+    case 148:
+        defaultCamZoom = 0.85;
+    case 150:
+        defaultCamZoom = 0.7;
+    case 154:
+        defaultCamZoom = 0.75;
+    case 156:
+        defaultCamZoom = 0.7;
+    case 184:
+        defaultCamZoom = 0.85;
+    case 192:
+        defaultCamZoom = 0.9;
+    case 208:
+        defaultCamZoom = 0.8;
+    case 212:
+        defaultCamZoom = 0.85;
+    case 214:
+        defaultCamZoom = 0.7;
+    case 218:
+        defaultCamZoom = 0.75;
+    case 220:
+        defaultCamZoom = 0.7;
+    case 224:
+        defaultCamZoom = 0.8;
+    case 248:
+        defaultCamZoom = 0.85;
+    case 288:
+        defaultCamZoom = 0.9;
+    case 312:
+        defaultCamZoom = 0.95;
+    case 320:
+        defaultCamZoom = 0.9;
+    case 354:
+        defaultCamZoom = 0.95;
+    case 368:
+        defaultCamZoom = 0.9;
+    case 374:
+        defaultCamZoom = 0.95;
+    case 380:
+        defaultCamZoom = 0.8;
+    case 384:
+        defaultCamZoom = 0.75;
+    case 512:
+        defaultCamZoom = 0.77;
+    case 576:
+        defaultCamZoom = 0.72;
+    case 640:
+        defaultCamZoom = 0.95;
+    case 696:
+        defaultCamZoom = 0.9;
+    case 704:
+        defaultCamZoom = 0.95;
+    case 766:
+        defaultCamZoom = 0.9;
+    case 768:
+        defaultCamZoom = 0.95;
+    case 820:
+        defaultCamZoom = 1;
+    case 824:
+        defaultCamZoom = 1.05;
+    case 828:
+        defaultCamZoom = 1.10;
+    case 832:
+        defaultCamZoom = 0.9;
+    case 864:
+        defaultCamZoom = 0.95;
+    case 884:
+        defaultCamZoom = 1;
+    case 888:
+        defaultCamZoom = 1.05;
+    case 892:
+        defaultCamZoom = 1.10;
+    case 896:
+        defaultCamZoom = 0.9;
+    case 1024:
+        defaultCamZoom = 0.95;
+    case 1088:
+        defaultCamZoom = 1;
+    case 1152:
+        defaultCamZoom = 0.85;
+    case 1280:
+        defaultCamZoom = 0.9;
+    case 1344:
+        defaultCamZoom = 0.95;
+    case 1376:
+        defaultCamZoom = 1;
+	  case 1400:
+    defaultCamZoom = 1.05;
+    
+  case 1408:
+    defaultCamZoom = 0.85;
+    
+  case 1568:
+    defaultCamZoom = 0.95;
+    
+  case 1588:
+    defaultCamZoom = 0.9;
+    
+  case 1592:
+    defaultCamZoom = 0.85;
+    
+  case 1596:
+    defaultCamZoom = 0.8;
+    
+  case 1600:
+    defaultCamZoom = 0.85;
+    
+  case 1632:
+    defaultCamZoom = 0.95;
+    
+  case 1652:
+    defaultCamZoom = 0.9;
+    
+  case 1656:
+    defaultCamZoom = 0.85;
+    
+  case 1660:
+    defaultCamZoom = 0.8;
+    
+  case 1664:
+    defaultCamZoom = 0.75;
+	
+}
 
-							if (curStep == 144)
-								{
-									defaultCamZoom = 0.8;
-								}
-
-						if (curStep == 148)
-							{
-								defaultCamZoom = 0.85;
-							}
-
-								if (curStep == 150)
-									{
-										defaultCamZoom = 0.7;
-									}
-
-							if (curStep == 154)
-								{
-									defaultCamZoom = 0.75;
-								}
-
-								if (curStep == 156)
-									{
-										defaultCamZoom = 0.7;
-									}
-
-						if (curStep == 156)
-							{
-								defaultCamZoom = 0.8;
-							}
-
-						if (curStep == 184)
-							{
-								defaultCamZoom = 0.85;
-							}
-							//dnv
-							if (curStep == 192)
-								{
-									defaultCamZoom = 0.9;
-								}
-		
-									if (curStep == 208)
-										{
-											defaultCamZoom = 0.8;
-										}
-		
-								if (curStep == 212)
-									{
-										defaultCamZoom = 0.85;
-									}
-		
-										if (curStep == 214)
-											{
-												defaultCamZoom = 0.7;
-											}
-		
-									if (curStep == 218)
-										{
-											defaultCamZoom = 0.75;
-										}
-		
-										if (curStep == 220)
-											{
-												defaultCamZoom = 0.7;
-											}
-		
-								if (curStep == 224)
-									{
-										defaultCamZoom = 0.8;
-									}
-		
-								if (curStep == 248)
-									{
-										defaultCamZoom = 0.85;
-									}
-									//fim do inicio (???)
-					if (curStep == 288)
-						{
-							defaultCamZoom = 0.9;
-						}
-						if (curStep == 312)
-							{
-								defaultCamZoom = 0.95;
-							}
-					if (curStep == 320)
-						{
-							defaultCamZoom = 0.9;
-						}
-						if (curStep == 354)
-							{
-								defaultCamZoom = 0.95;
-							}
-							if (curStep == 368)
-								{
-									defaultCamZoom = 0.9;
-								}
-								if (curStep == 374)
-									{
-										defaultCamZoom = 0.95;
-									}
-							if (curStep == 380)
-								{
-									defaultCamZoom = 0.8;
-								}
-						if (curStep == 384)
-							{
-								defaultCamZoom = 0.75;
-							}
-							if (curStep == 512)
-								{
-									defaultCamZoom = 0.77;
-								}
-								if (curStep == 576)
-									{
-										defaultCamZoom = 0.72;
-									}
-					if (curStep == 640)
-						{
-							defaultCamZoom = 0.95;
-						}
-						if (curStep == 696)
-							{
-								defaultCamZoom = 0.9;
-							}
-					if (curStep == 704)
-						{
-							defaultCamZoom = 0.95;
-						}
-						if (curStep == 766)
-							{
-								defaultCamZoom = 0.9;
-							}
-					if (curStep == 768)
-						{
-							defaultCamZoom = 0.95;
-						}
-						if (curStep == 820)
-							{
-								defaultCamZoom = 1;
-							}
-							if (curStep == 824)
-								{
-									defaultCamZoom = 1.05;
-								}
-								if (curStep == 828)
-									{
-										defaultCamZoom = 1.10;
-									}
-					if (curStep == 832)
-						{
-							defaultCamZoom = 0.9;
-						}
-					if (curStep == 864)
-						{
-							defaultCamZoom = 0.95;
-						}
-						if (curStep ==  884)
-							{
-								defaultCamZoom = 1;
-							}
-							if (curStep == 888) 
-								{
-									defaultCamZoom = 1.05;
-								}
-								if (curStep == 892)
-									{
-										defaultCamZoom = 1.10;
-									}
-				if (curStep == 896)
-					{
-						defaultCamZoom = 0.9;
-					}
-					if (curStep == 1024)
-						{
-							defaultCamZoom = 0.95;
-						}
-						if (curStep == 1088)
-							{
-								defaultCamZoom = 1;
-							}
-					if (curStep == 1152)
-						{
-							defaultCamZoom = 0.85;
-						}
-						if (curStep == 1280)
-							{
-								defaultCamZoom = 0.9;
-							}
-							if (curStep == 1344)
-								{
-									defaultCamZoom = 0.95;
-								}
-								if (curStep == 1376)
-									{
-										defaultCamZoom = 1;
-									}
-									if (curStep == 1400)
-										{
-											defaultCamZoom = 1.05;
-										}
-					if (curStep == 1408)
-						{
-							defaultCamZoom = 0.85;
-						}
-						if (curStep == 1568)
-							{
-								defaultCamZoom = 0.95;
-							}
-							if (curStep == 1588)
-								{
-									defaultCamZoom = 0.9;
-								}
-								if (curStep == 1592)
-									{
-										defaultCamZoom = 0.85;
-									}
-									if (curStep == 1596)
-										{
-											defaultCamZoom = 0.8;
-										}
-
-							if (curStep == 1600)
-								{
-									defaultCamZoom = 0.85;
-								}
-						if (curStep == 1632)
-							{
-								defaultCamZoom = 0.95;
-							}
-							if (curStep == 1652)
-								{
-									defaultCamZoom = 0.9;
-								}
-								if (curStep == 1656)
-									{
-										defaultCamZoom = 0.85;
-									}
-									if (curStep == 1660)
-										{
-											defaultCamZoom = 0.8;
-										}
-										if (curStep == 1664)
-											{
-												defaultCamZoom = 0.75;
-											}
+							
 				}
 
 		lastStepHit = curStep;

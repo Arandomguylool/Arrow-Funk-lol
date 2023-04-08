@@ -387,26 +387,6 @@ class MainMenuState extends MusicBeatState
 							menushit.animation.play('cred');
 		}
 
-	/*	switch (curSelected)
-		{
-			case 0:
-				cg.animation.play('idle');
-			case 1:
-				cg.animation.play('fix');
-				cg.animation.finishCallback = function(fix)
-					{
-						cg.animation.play('fix2');
-					}
-			case 2:
-				cg.animation.play('tape');
-				cg.animation.finishCallback = function(tape)
-					{
-						cg.animation.play('tape2');
-					}
-			case 3:
-				cg.animation.play('idle');
-		}
-*/
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.animation.play('idle');

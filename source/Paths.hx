@@ -266,6 +266,20 @@ class Paths
 		return returnAsset;
 	}
 
+	public static var notesplasgpu:Array<String> =
+	[
+		"noteSplashes",
+		"HURTnoteSplashes",
+		"SHOOTnoteSplashes",
+
+    ];
+
+	public static var importanteGPU:Array<String> = 
+	[
+		"NOTE_assets",
+		"HURTNOTE_assets",
+		"SHOOTNOTE_assets"
+	]; // hack feito, porém, feio
 
 	public static function returnGraphic(key:String, ?library:String) {
 		var path:String = getPath('images/$key.png', IMAGE, library);
@@ -274,7 +288,7 @@ class Paths
 				var graphic:FlxGraphic;
 				var bitmapData:BitmapData = OpenFlAssets.getBitmapData(path);
 
-				if (ClientPrefs.permitirgpu) {
+				if (ClientPrefs.permitirgpu && importanteGPU.contains(key)) { // Odeio isso, i know your ip
 					#if (debug && !mobile)
 					trace('carregando $path por GPU'); //Apenas para trackear se tem alguma coisa ocupando memória onde não deveria.
 					//Isso faz o jogo lagar um pouquinho, mas é só no debug mesmo pra saber se não tem nada absurdo sendo carregado.
