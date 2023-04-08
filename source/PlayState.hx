@@ -4890,7 +4890,7 @@ class PlayState extends MusicBeatState
 		
 			case 1:
 				FlxTween.tween(songinfo, {x: 0}, 2.6, {ease: FlxEase.expoOut});
-			case 2:
+			case 32:
 				FlxTween.tween(songinfo, {x: -500}, 2.6, {
 					ease: FlxEase.expoIn,
 					onComplete: function(twn:FlxTween)
