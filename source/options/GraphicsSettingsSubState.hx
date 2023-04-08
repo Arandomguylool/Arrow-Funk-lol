@@ -42,6 +42,13 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			false); //Default value
 		addOption(option);
 
+		var option:Option = new Option('Texturas na GPU', //Name
+			'Se marcado, as texturas do jogo vão ser carregadas na sua\nplaca gráfica, necessitando de abrir e fechar o jogo\nquase sempre após uma week', //Description
+			'permitirgpu', //Save data variable name
+			'bool', //Variable type
+			false); //Default value
+		addOption(option);
+
 		var option:Option = new Option('Anti-Aliasing',
 			'If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.',
 			'globalAntialiasing',
